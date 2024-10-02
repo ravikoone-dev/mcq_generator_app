@@ -17,6 +17,9 @@ This is a web based project which is going to give you a set of MCQ's to the use
 ### API development 
 - get method : fetch_questions(based on skill)
 - get result : result_for_testid()
+- #### References :
+  - https://docs.python.org/3/library/sqlite3.html
+  - https://www.w3schools.com/python/ref_random_sample.asp
 
 ### UI screens 
 - Home screen
