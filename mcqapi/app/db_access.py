@@ -19,7 +19,7 @@ def get_db_connection():
     
     return cn
 
-def fetch_question_mapper(skill):
+def select_question_mapper(skill):
     #try:
     cn = get_db_connection() 
     cursor = cn.execute('''SELECT file_name FROM question_mapper WHERE skill = ?''', (skill,))
@@ -30,7 +30,7 @@ def fetch_question_mapper(skill):
 
 
 def fetch_questions(skill) : 
-    file_name = fetch_question_mapper(skill)
+    file_name = select_question_mapper(skill)
     if file_name :
         file_path = os.path.join(os.curdir,'mcqdb', file_name)
         with open(file_path, 'r',encoding='utf-8') as file:
@@ -52,6 +52,13 @@ def insert_current_session(data):
     finally :
         cn.close()
 
-
+def select_session_data(id):
+    #try:
+    cn = get_db_connection() 
+    cursor = cn.execute('''SELECT file_name FROM current_session WHERE id = ?''', (id,))
+    res = cursor.fetchone()
+    #finally :
+    #    cn.close()
+    return res[0] if res else None
 
         

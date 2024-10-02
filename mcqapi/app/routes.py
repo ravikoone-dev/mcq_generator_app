@@ -10,3 +10,10 @@ def test():
         return {"error":"skill parameter is required"}, 400
     return controllers.fetch_test(skill)
 
+@main.route('/result', methods=['GET'])
+def result():
+    data = request.get_json()
+    print(data)
+    if data is None:
+        return {"error": "Invalid JSON or missing content"}, 400
+    return controllers.fetch_result(data)
