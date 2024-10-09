@@ -3,13 +3,24 @@ import logging
 import os 
 import json
 
+# SQLlite3 database name
 Database = 'MCQ.db'
+
+"""
+Establishes a conncetion to the MCQ.db, verifies one of the required table is presnet 
+in the Db. If its not present then it would initialize the db with insert.sql
+
+returns : 
+    connection to MCQ.db
+
+"""
 
 def get_db_connection():
     cn = sqlite3.connect(Database)
     cn.row_factory = sqlite3.Row
     
     res = cn.execute("SELECT name FROM sqlite_master WHERE name='current_session'")
+    
     if res.fetchone() is None :
         file_path = os.path.join(os.curdir,'app','db_init.sql')
         logging.info(file_path)
