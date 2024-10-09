@@ -12,4 +12,4 @@ CREATE TABLE current_session (
     file_name text
     );
 
-INSERT INTO question_mapper (skill, file_name) VALUES ('finance', 'financial_questions.json'); 
+INSERT INTO question_mapper (skill, file_name) VALUES ('finance', 'Financial_questions.json'); 

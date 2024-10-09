@@ -1,0 +1,30 @@
+FROM python:alpine3.20
+
+# Install the required packages for API 
+COPY requirements.txt /home/mcqapp/
+RUN pip install -r /home/mcqapp/requirements.txt
+
+#create a folder for hosting the application
+RUN mkdir -p /home/mcqapp/app
+
+#copy the application related files
+COPY app/*.py /home/mcqapp/app/
+COPY app/*.sql /home/mcqapp/app/
+COPY run.py /home/mcqapp/
+COPY  mcqdb /home/mcqapp/mcqdb
+
+# create a non root user for application 
+RUN adduser -D appuser
+RUN chown -R appuser:appuser /home/mcqapp
+
+# set the work directory for application to start
+WORKDIR /home/mcqapp
+
+#switch to application user
+USER appuser
+
+# port on which the application starts 
+EXPOSE 5000
+
+# Entry point
+CMD ["python3", "run.py"]
